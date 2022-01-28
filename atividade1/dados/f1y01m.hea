@@ -1,0 +1,6 @@
+f1y01m 2 250 900000
+f1y01m.mat 16+192 2000/mV 16 0 16000 6824 0 RESP
+f1y01m.mat 16+192 2000/mV 16 0 15904 18824 0 ECG
+# Age: 23 Sex: F
+#Creator: wfdb2mat
+#Source: record fantasia/f1y01
