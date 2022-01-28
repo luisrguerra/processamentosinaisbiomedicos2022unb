@@ -1,6 +1,6 @@
-plotATM("f2y05m", "Jovem",5); %f2y05m
+plotATM("f2y05m", "Jovem",5); %f2y05m paciente escolhido
 pause(1.3); %Pausa para mostrar que existe duas janelas uma em cima da outra
-plotATM("f2o05m", "Idoso",5); %f2o05m
+plotATM("f2o05m", "Idoso",5); %f2o05m paciente escolhido
 
 function plotATM(Arquivo,Title,tempoMinutos)
 
@@ -64,6 +64,7 @@ end
 
 x = (1:size(val, 2)) * interval;
 
+% Ajuste na posição e tamanho da janela
 janela = figure('name',Name);
 posicaox = 400;
 posicaoy = 300;
@@ -71,23 +72,24 @@ altura = 400;
 comprimento = 1000;
 janela.Position = [posicaox posicaoy comprimento altura];
 
+%Calculo para o intervalo de tempo
 frequencia = 250;
 tempox = tempoMinutos*60*frequencia;
 %disp(tempox);
 
 
-subplot(2,1,1);
-plot(x(1:tempox)', val(1, 1:tempox)');
+subplot(2,1,1);% Subplotar em cima
+plot(x(1:tempox)', val(1, 1:tempox)'); %Plotar aplicando o intervalo de tempo
 title( strcat(Arquivo," - ",Title, ' - Respiração') );
-legend( strcat(signal{1}, ' (', units{1}, ')') );
+legend( strcat(signal{1}, ' (', units{1}, ')') ); %Legenda da linha com unidade de medida
 xlabel('Tempo (segundos)');
-grid on;
+grid on; %Ativar linha no gráfico
 
-subplot(2,1,2);
-plot(x(1:tempox)', val(2, 1:tempox)');
+subplot(2,1,2);% Subplotar em baixo
+plot(x(1:tempox)', val(2, 1:tempox)');%Plotar aplicando o intervalo de tempo
 title( strcat(Arquivo," - ",Title,' - Eletrocardiograma') );
-legend( strcat(signal{2}, ' (', units{2}, ')') );
+legend( strcat(signal{2}, ' (', units{2}, ')') ); %Legenda da linha com unidade de medida
 xlabel('Tempo (segundos)');
-grid on;
+grid on; %Ativar linha no gráfico
 
-end
+end % Fim da função plotATM()
