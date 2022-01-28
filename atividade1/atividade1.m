@@ -1,7 +1,8 @@
-plotATM("dados\f2y05m", "Jovem",5); %f2y05m
-plotATM("dados\f2o05m", "Idoso",5); %f2o05m
+plotATM("f2y05m", "Jovem",5); %f2y05m
+pause(1.3); %Pausa para mostrar que existe duas janelas uma em cima da outra
+plotATM("f2o05m", "Idoso",5); %f2o05m
 
-function plotATM(Name,Title,tempoMinutos)
+function plotATM(Arquivo,Title,tempoMinutos)
 
 % usage: plotATM('RECORDm')
 %
@@ -27,6 +28,7 @@ function plotATM(Name,Title,tempoMinutos)
 % plotATM.m           O. Abdala			16 March 2009
 % 		      James Hislop	       27 January 2014	version 1.1
 
+Name = strcat("dados\", Arquivo); %Adiciona o endereço do diretórios dos dados dos cardiogramas
 infoName = strcat(Name, '.info');
 matName = strcat(Name, '.mat');
 Octave = exist('OCTAVE_VERSION');
@@ -62,23 +64,29 @@ end
 
 x = (1:size(val, 2)) * interval;
 
-figure('name',Name);
+janela = figure('name',Name);
+posicaox = 400;
+posicaoy = 300;
+altura = 400;
+comprimento = 1000;
+janela.Position = [posicaox posicaoy comprimento altura];
 
 frequencia = 250;
 tempox = tempoMinutos*60*frequencia;
 %disp(tempox);
 
+
 subplot(2,1,1);
 plot(x(1:tempox)', val(1, 1:tempox)');
-title(strcat(Title, ' - Respiração') );
-legend(strcat(signal{1}, ' (', units{1}, ')'));
+title( strcat(Arquivo," - ",Title, ' - Respiração') );
+legend( strcat(signal{1}, ' (', units{1}, ')') );
 xlabel('Tempo (segundos)');
 grid on;
 
 subplot(2,1,2);
 plot(x(1:tempox)', val(2, 1:tempox)');
-title(strcat(Title, ' - Eletrocardiograma') );
-legend(strcat(signal{2}, ' (', units{2}, ')'));
+title( strcat(Arquivo," - ",Title,' - Eletrocardiograma') );
+legend( strcat(signal{2}, ' (', units{2}, ')') );
 xlabel('Tempo (segundos)');
 grid on;
 
